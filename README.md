@@ -418,6 +418,7 @@ items.sort(key=sort_item)
 print(items)
 ```
 
+## Lambda Function
 ```python
 # A lambda function is a small anonymous function. A lambda function can take any number of arguments, but can only have one expression.
 # lambda parameter : expression ... expression will return the value default
@@ -425,19 +426,6 @@ items.sort(key = lambda item: item[1])
 print(items)
 ```
 
-```python
-# map() function returns a map object(which is an iterator) of the results after applying the given function to each item of a given iterable (list, tuple etc.)
-prices = list(map(lambda item: item[1], items)) # [10, 9, 11]
-prices = [item[1] for item in items] # [10, 9, 11] ... List comprehension
-```
-
-```python
-# filter
-print(list(filter(lambda item: item[1] > 9, items)))
-prices = [item[1] for item in items if item[1] > 9]  # [10, 11] ... List comprehension
-```
-
-## Lambda Function
 ```python
 # The power of lambda is better shown when you use them as an anonymous function inside another function.
 def myfunc(n):
@@ -453,6 +441,12 @@ print(mytripler(11))
 ## Map Function
 
 ```python
+# map() function returns a map object(which is an iterator) of the results after applying the given function to each item of a given iterable (list, tuple etc.)
+prices = list(map(lambda item: item[1], items)) # [10, 9, 11]
+prices = [item[1] for item in items] # [10, 9, 11] ... List comprehension
+```
+
+```python
 def addition(n):
     return n[1] + n[1]
 result = map(addition, items)
@@ -466,6 +460,14 @@ test = list(map(list, l))
 print(test) # [['s', 'a', 't'], ['b', 'a', 't'], ['c', 'a', 't'], ['m', 'a', 't']]
 ```
 
+## Filter
+
+```python
+# filter
+print(list(filter(lambda item: item[1] > 9, items)))
+prices = [item[1] for item in items if item[1] > 9]  # [10, 11] ... List comprehension
+```
+
 ## Reduce / Accumulate Function
 
 ```python
@@ -475,9 +477,12 @@ lis = [1, 3, 4, 10, 4]
 # printing summation using accumulate()
 print("The summation of list using accumulate is :", end="")
 print(list(itertools.accumulate(lis, lambda x, y: x+y)))
+# The summation of list using accumulate is :[1, 4, 8, 18, 22]
+
 # printing summation using reduce()
 print("The summation of list using reduce is :", end="")
 print(functools.reduce(lambda x, y: x+y, lis))
+# The summation of list using reduce is :22
 ```
 
 ## Zip function
@@ -565,6 +570,16 @@ print(combined) # {"x": 1, "y": 2} .... for keyword arguments we have double **
 ```
 
 ## Static and Class Methods
+
+Static methods, much like class methods, are methods that are bound to a class rather than its object.  
+
+They do not require a class instance creation. So, they are not dependent on the state of the object.  
+
+The difference between a static method and a class method is:  
+  
+Static method knows nothing about the class and just deals with the parameters.  
+Class method works with the class since its parameter is always the class itself.  
+They can be called both by the class and its object.  
 
 ```python
 class Car:
@@ -715,7 +730,7 @@ f2(c) # b: 2
 ## Iterators
 
 Iterators are objects that can be iterated upon. An object which will return data, one element at a time
- Generally we can say, iterator has __iter__ and __next__ methods inbuilt.. example.. list, tuple, str etc
+ Generally we can say, iterator has "__iter__" and "__next__" methods inbuilt.. example.. list, tuple, str etc
 
 ```python
 # define a list
@@ -932,7 +947,223 @@ else:
   print("Search unsuccessful.")
 ```
 
+## Partial Functions
+partial function is a cool tool to write reusable code.  
+Partial functions allow us to fix a certain number of arguments of a function and generate a new function.  
+You can think of a partial function as an extension of another specified function. A partial function has the same functionality of the specified function, but with pre-filled values for a certain number of arguments.  
+
+```python
+from functools import *
+  
+# A normal function
+def add(a, b):
+    return a + b
+  
+# A partial function with b = 1 and c = 2
+add_part = partial(add, 1, 2)
+  
+# Calling partial function
+print(add_part()) # Output : 3
+```
+
+
 # Data structure & Algoriths
+
+---------------------------------------------
+Binary Search
+---------------------------------------------
+```python
+from util import time_it
+
+@time_it
+def linear_search(numbers_list, number_to_find):
+    for index, element in enumerate(numbers_list):
+        if element == number_to_find:
+            return index
+    return -1
+
+@time_it
+def binary_search(numbers_list, number_to_find):
+    left_index = 0
+    right_index = len(numbers_list) - 1
+    mid_index = 0
+
+    while left_index <= right_index:
+        mid_index = (left_index + right_index) // 2
+        mid_number = numbers_list[mid_index]
+
+        if mid_number == number_to_find:
+            return mid_index
+
+        if mid_number < number_to_find:
+            left_index = mid_index + 1
+        else:
+            right_index = mid_index - 1
+
+    return -1
+
+def binary_search_recursive(numbers_list, number_to_find, left_index, right_index):
+    if right_index < left_index:
+        return -1
+
+    mid_index = (left_index + right_index) // 2
+    if mid_index >= len(numbers_list) or mid_index < 0:
+        return -1
+
+    mid_number = numbers_list[mid_index]
+
+    if mid_number == number_to_find:
+        return mid_index
+
+    if mid_number < number_to_find:
+        left_index = mid_index + 1
+    else:
+        right_index = mid_index - 1
+
+    return binary_search_recursive(numbers_list, number_to_find, left_index, right_index)
+
+if __name__ == '__main__':
+    numbers_list = [12, 15, 17, 19, 21, 24, 45, 67]
+    number_to_find = 21
+
+    index = binary_search_recursive(numbers_list, number_to_find, 0, len(numbers_list))
+    print(f"Number found at index {index} using binary search")
+```
+---------------------------------------------
+Bubble Sort
+---------------------------------------------
+```python
+def bubble_sort(elements):
+    size = len(elements)
+
+    for i in range(size-1):
+        for j in range(size-1):
+            if elements[j] > elements[j+1]:
+                elements[j], elements[j+1] = elements[j+1], elements[j]
+
+if __name__ == '__main__':
+    elements = [5,9,2,1,67,34,88,34]
+    elements = ["mona", "dhaval", "aamir", "tina", "chang"]
+
+    bubble_sort(elements)
+    print(elements)
+```
+
+
+---------------------------------------------
+Linked List
+---------------------------------------------
+```python
+class Node:
+    def __init__(self, data=None, next=None):
+        self.data = data
+        self.next = next
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def print(self):
+        if self.head is None:
+            print("Linked list is empty")
+            return
+        itr = self.head
+        llstr = ''
+        while itr:
+            llstr += str(itr.data)+' --> ' if itr.next else str(itr.data)
+            itr = itr.next
+        print(llstr)
+
+    def get_length(self):
+        count = 0
+        itr = self.head
+        while itr:
+            count+=1
+            itr = itr.next
+
+        return count
+
+    def insert_at_begining(self, data):
+        node = Node(data, self.head)
+        self.head = node
+
+    def insert_at_end(self, data):
+        if self.head is None:
+            self.head = Node(data, None)
+            return
+
+        itr = self.head
+
+        while itr.next:
+            itr = itr.next
+
+        itr.next = Node(data, None)
+
+    def insert_at(self, index, data):
+        if index<0 or index>self.get_length():
+            raise Exception("Invalid Index")
+
+        if index==0:
+            self.insert_at_begining(data)
+            return
+
+        count = 0
+        itr = self.head
+        while itr:
+            if count == index - 1:
+                node = Node(data, itr.next)
+                itr.next = node
+                break
+
+            itr = itr.next
+            count += 1
+
+    def remove_at(self, index):
+        if index<0 or index>=self.get_length():
+            raise Exception("Invalid Index")
+
+        if index==0:
+            self.head = self.head.next
+            return
+
+        count = 0
+        itr = self.head
+        while itr:
+            if count == index - 1:
+                itr.next = itr.next.next
+                break
+
+            itr = itr.next
+            count+=1
+
+    def insert_values(self, data_list):
+        self.head = None
+        for data in data_list:
+            self.insert_at_end(data)
+
+    def get_middel_node(self, key):
+        count = 0
+        iter = self.head
+        while iter:
+            count += 1
+            if count == key:
+                return iter.data
+            iter = iter.next
+
+
+if __name__ == '__main__':
+    ll = LinkedList()
+    ll.insert_values(["banana","mango","grapes","orange"])
+    ll.insert_at(1,"blueberry")
+    ll.remove_at(2)
+    ll.print()
+
+    ll.insert_values([45,7,12,567,99])
+    ll.insert_at_end(67)
+    ll.get_middel_node(2) # mango
+    ll.get_middel_node(4) # orange
+    ll.print()
+```
 
 ---------------------------------------------
 Simple Tree
@@ -991,4 +1222,41 @@ def build_product_tree():
 
 if __name__ == '__main__':
     build_product_tree()
+```
+
+---------------------------------------------
+Binary Tree
+---------------------------------------------
+Every node has at most 2 child nodes.  
+
+Binary Search Tree : left side nodes values less than root node.  
+   Cannot have duplicate values  
+   Every Iteration we reduce search space by 1/2.  
+n = 8 , 8 > 4 > 2 > 1  
+Total 3 Iteration so it means,  
+log<sub>2</sub>8 = 3  
+
+Traversal Techniques:  
+Breadth first Search  
+Depth first Search  
+    -- In Order Traversal  
+    -- Pre Order Traversal  
+    -- Post Order Traversal  
+![Binary tree](./img/binary_tree.png?raw=true "Binary tree")
+
+# Problem Solving Programs
+
+```python
+def cipher(strr, count):
+    cipher_arr = []
+    for i in strr:
+        # ord() will convert into the ascii value
+        final = ord(i) + count
+        if final > 122:
+            final = 96 + (final - 122)
+        # chr() convert ascii to character
+        cipher_arr.append(chr(final))
+    return "".join(cipher_arr)
+
+print(cipher("abcxyz", 4))
 ```
