@@ -543,3 +543,20 @@ add_part = partial(add, 1, 2)
 # Calling partial function
 print(add_part()) # Output : 3
 ```
+
+## Cipher
+This is the encryption algorithm.
+
+```python
+def cipher(strr, count):
+    cipher_arr = []
+    for i in strr:
+        # ord() will convert into the ascii value
+        final = ord(i) + count
+        if final > 122:
+            final = 96 + (final - 122)
+        # chr() convert ascii to character
+        cipher_arr.append(chr(final))
+    return "".join(cipher_arr)
+
+print(cipher("abcxyz", 4))

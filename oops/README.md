@@ -9,9 +9,7 @@ Reuse of code through inheritance
 Flexibility through polymorphism  
 Effective problem solving  
 
----------------------------------------------
-Inheritance
----------------------------------------------
+## Inheritance
 
 Inheritance is the capability of one class to derive or inherit the properties from another class.    
 
@@ -67,9 +65,7 @@ print(issubclass(Person, object)) # True
 
 ```
 
----------------------------------------------
-Polymorphism
----------------------------------------------
+## Polymorphism
 
 The word polymorphism means having many forms.  
 polymorphism means the same function name (but different signatures) being used for different types.  
@@ -162,9 +158,7 @@ obj1.show() # Inside Parent
 obj2.show() # Inside Child
 ```
 
----------------------------------------------
-Abstraction
----------------------------------------------
+## Abstraction
 
 
 Abstraction is defined as a process of handling complexity by hiding unnecessary information from the user
@@ -238,9 +232,7 @@ print(s.read()) # Memory2Stream is reading
 
 ```
 
---------------------------------------------
-Encapsulation
---------------------------------------------
+## Encapsulation
 
 
 It describes the idea of wrapping data and the methods that work on data within one unit.  
