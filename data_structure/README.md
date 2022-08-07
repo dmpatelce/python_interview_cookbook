@@ -210,7 +210,7 @@ Depth first Search
 - In Order Traversal  
 - Pre Order Traversal  
 - Post Order Traversal  
-![Binary tree](../img/binary_tree.png?raw=true "Binary tree")
+![Binary tree](./img/binary_tree.png?raw=true "Binary tree")
 
 # Problem Solving Programs
 
