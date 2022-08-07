@@ -206,7 +206,7 @@ log<sub>2</sub>8 = 3
 Traversal Techniques:  
 Breadth first Search  
 Depth first Search  
-*
+
 - In Order Traversal  
 - Pre Order Traversal  
 - Post Order Traversal  
