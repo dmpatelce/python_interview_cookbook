@@ -387,5 +387,5 @@ c.price = 20 # set value to 20
 print(c.price) # 20
 print(c.pricexyz) # 20
 # If you comment the setter method and then try to assign the value
-c.price = 20 # rasie AttributeError : can't set attribute
+c.price = 20 # raise AttributeError : can't set attribute
 ```

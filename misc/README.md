@@ -507,6 +507,29 @@ divide(2,5) # 0.4
 divide(2,0) # Whoops! cannot divide
 ```
 
+### Class Decorator
+
+```python
+class MyDecorator:
+    def __init__(self, function):
+        self.function = function
+     
+    def __call__(self):
+ 
+        # We can add some code
+        # before function call
+        self.function()
+        # We can also add some code
+        # after function call.
+ 
+# adding class decorator to the function
+@MyDecorator
+def function():
+    print("Print Here")
+ 
+function()
+```
+
 ## Regular Expression
 
 A Regular Expression (RegEx) is a sequence of characters that defines a search pattern.
