@@ -2,6 +2,7 @@
 
 The Template method is a Behavioral Design Pattern that defines the skeleton of the operation and leaves the details to be implemented by the child class.  
 Its subclasses can override the method implementations as per need but the invocation is to be in the same way as defined by an abstract class.  
+The template pattern defines the skeleton of an algorithm in an operation deferring some steps to sub-classes. The template method lets subclasses redefine certain steps of an algorithm without changing the algorithm structure.  
 So, ultimately we have one template class and template methods with proper sequence of execution and all the subclasses will also follow the same template.
 
 ## Advantage
